@@ -25,7 +25,7 @@ class GitTools < Formula
     touch "test.txt"
     system "git", "add", "test.txt"
     system "git", "commit", "-m", "Initial commit"
-    assert_match "Regular", shell_output("#{bin}/git-commit-stats")
+    assert_match(/Commit\s+Regular \(A\/M\/D\)\s+Symlinks \(A\/M\/D\)/, shell_output("#{bin}/git-commit-stats"))
     assert_match "1 /   0 /   0", shell_output("#{bin}/git-commit-stats")
   end
 end
