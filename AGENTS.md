@@ -37,6 +37,22 @@ Check for style violations, missing dependencies, or other structural issues:
 brew audit --new jfasoc/tap/git-tools
 ```
 
+### Run Formula Style Check
+
+Check for Ruby style violations using RuboCop:
+
+```bash
+brew style jfasoc/tap/git-tools
+```
+
+### Run Tap Readability Check
+
+Ensure all formulae in the tap can be loaded correctly:
+
+```bash
+brew readall jfasoc/tap
+```
+
 ## 3. Python Formula Best Practices
 
 *   **Python Version**: Use the version agreed upon with the user (e.g., `python@3.14`).
@@ -49,5 +65,7 @@ brew audit --new jfasoc/tap/git-tools
 
 Before calling `submit`:
 - [ ] `brew audit --new <formula>` passes without errors.
+- [ ] `brew style <formula>` passes.
+- [ ] `brew readall <tap>` passes.
 - [ ] `brew test <formula>` passes.
 - [ ] All temporary files (e.g., metadata JSON files) are deleted.
