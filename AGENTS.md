@@ -63,7 +63,7 @@ brew readall jfasoc/tap
 
 ## 4. Verification Checklist
 
-Before calling `submit`:
+Before pushing commits or creating a Pull Request:
 - [ ] `brew audit --new <formula>` passes without errors.
 - [ ] `brew style <formula>` passes.
 - [ ] `brew readall <tap>` passes.
