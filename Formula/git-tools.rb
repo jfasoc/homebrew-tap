@@ -7,7 +7,6 @@ class GitTools < Formula
   sha256 "b0e5903ec323649f3e692e66b4771308b0880e664e7c3c0d423ceaf0bb05eac7"
   license "MIT"
 
-  depends_on "git"
   depends_on "python@3.14"
 
   resource "pdm-backend" do
