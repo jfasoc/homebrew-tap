@@ -3,20 +3,13 @@ class GitTools < Formula
 
   desc "Collection of Git helper tools"
   homepage "https://github.com/jfasoc/git-tools"
-
-  option "with-completion-branch", "Use the branch with shell completions"
-
-  if build.with? "completion-branch"
-    url "https://github.com/jfasoc/git-tools.git", branch: "add-shell-completion-3611108432175409763"
-    version "0.0.1-completion"
-  else
-    url "https://github.com/jfasoc/git-tools/archive/refs/tags/v0.0.1.tar.gz"
-    sha256 "b0e5903ec323649f3e692e66b4771308b0880e664e7c3c0d423ceaf0bb05eac7"
-  end
-
+  url "https://github.com/jfasoc/git-tools/archive/refs/tags/v0.0.1.tar.gz"
+  sha256 "b0e5903ec323649f3e692e66b4771308b0880e664e7c3c0d423ceaf0bb05eac7"
   license "MIT"
 
   head "https://github.com/jfasoc/git-tools.git", branch: "main"
+
+  option "with-completion-branch", "Use the branch with shell completions"
 
   depends_on "python@3.14"
 
@@ -26,6 +19,13 @@ class GitTools < Formula
   end
 
   def install
+    if build.with? "completion-branch"
+      # Fetch the completion branch manually
+      system "git", "clone", "--depth", "1", "--branch",
+             "add-shell-completion-3611108432175409763",
+             "https://github.com/jfasoc/git-tools.git", buildpath
+    end
+
     virtualenv_install_with_resources
 
     if File.directory?("completions")
