@@ -3,9 +3,20 @@ class GitTools < Formula
 
   desc "Collection of Git helper tools"
   homepage "https://github.com/jfasoc/git-tools"
-  url "https://github.com/jfasoc/git-tools/archive/refs/tags/v0.0.1.tar.gz"
-  sha256 "b0e5903ec323649f3e692e66b4771308b0880e664e7c3c0d423ceaf0bb05eac7"
+
+  option "with-completion-branch", "Use the branch with shell completions"
+
+  if build.with? "completion-branch"
+    url "https://github.com/jfasoc/git-tools.git", branch: "add-shell-completion-3611108432175409763"
+    version "0.0.1-completion"
+  else
+    url "https://github.com/jfasoc/git-tools/archive/refs/tags/v0.0.1.tar.gz"
+    sha256 "b0e5903ec323649f3e692e66b4771308b0880e664e7c3c0d423ceaf0bb05eac7"
+  end
+
   license "MIT"
+
+  head "https://github.com/jfasoc/git-tools.git", branch: "main"
 
   depends_on "python@3.14"
 
@@ -16,6 +27,11 @@ class GitTools < Formula
 
   def install
     virtualenv_install_with_resources
+
+    if File.directory?("completions")
+      bash_completion.install "completions/git-tools.bash" if File.exist?("completions/git-tools.bash")
+      zsh_completion.install "completions/git-tools.zsh" => "_git-tools" if File.exist?("completions/git-tools.zsh")
+    end
   end
 
   test do
