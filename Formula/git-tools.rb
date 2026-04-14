@@ -3,19 +3,19 @@ class GitTools < Formula
 
   desc "Collection of Git helper tools"
   homepage "https://github.com/jfasoc/git-tools"
-  url "https://github.com/jfasoc/git-tools/archive/refs/tags/v0.0.1.tar.gz"
-  sha256 "b0e5903ec323649f3e692e66b4771308b0880e664e7c3c0d423ceaf0bb05eac7"
+  url "https://github.com/jfasoc/git-tools/archive/refs/tags/v0.1.2.tar.gz"
+  sha256 "99fe4afa5be0eafe89b1727984d6506f8b11290f1def1e5989f49cb2e76ae405"
   license "MIT"
 
   head "https://github.com/jfasoc/git-tools.git", branch: "main"
 
   option "with-completion-branch", "Use the branch with shell completions"
 
-  depends_on "python@3.14"
+  depends_on "python@3.12"
 
   resource "pdm-backend" do
-    url "https://files.pythonhosted.org/packages/e2/38/d22c1050130b8cdf16fef76c99c59968086802744947f2813d45c69cca52/pdm_backend-2.4.7.tar.gz"
-    sha256 "a509d083850378ce919d41e7a2faddfc57a1764d376913c66731125d6b14110f"
+    url "https://files.pythonhosted.org/packages/7c/7e/6d441c8739a30820ec59517a88326789c201ae43a344b2ffb02fb2702d8e/pdm_backend-2.4.8.tar.gz"
+    sha256 "d8ef85d2c4306ee67195412d701fae9983e84ec6574598e26798ae26b7b3c7e0"
   end
 
   def install
