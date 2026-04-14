@@ -7,6 +7,10 @@ class GitTools < Formula
   sha256 "b0e5903ec323649f3e692e66b4771308b0880e664e7c3c0d423ceaf0bb05eac7"
   license "MIT"
 
+  head "https://github.com/jfasoc/git-tools.git", branch: "main"
+
+  option "with-completion-branch", "Use the branch with shell completions"
+
   depends_on "python@3.14"
 
   resource "pdm-backend" do
@@ -15,7 +19,19 @@ class GitTools < Formula
   end
 
   def install
+    if build.with? "completion-branch"
+      # Fetch the completion branch manually
+      system "git", "clone", "--depth", "1", "--branch",
+             "add-shell-completion-3611108432175409763",
+             "https://github.com/jfasoc/git-tools.git", buildpath
+    end
+
     virtualenv_install_with_resources
+
+    if File.directory?("completions")
+      bash_completion.install "completions/git-tools.bash" if File.exist?("completions/git-tools.bash")
+      zsh_completion.install "completions/git-tools.zsh" => "_git-tools" if File.exist?("completions/git-tools.zsh")
+    end
   end
 
   test do
