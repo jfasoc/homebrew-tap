@@ -11,6 +11,7 @@ class GitTools < Formula
 
   option "with-completion-branch", "Use the branch with shell completions"
 
+  depends_on "git" => :build
   depends_on "python@3.12"
 
   resource "pdm-backend" do
@@ -19,6 +20,8 @@ class GitTools < Formula
   end
 
   def install
+    ENV["PDM_BUILD_SCM_VERSION"] = version.to_s
+
     if build.with? "completion-branch"
       # Fetch the completion branch manually
       system "git", "clone", "--depth", "1", "--branch",
