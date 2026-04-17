@@ -20,7 +20,7 @@ class GitTools < Formula
   end
 
   def install
-    ENV["PDM_BUILD_SCM_VERSION"] = version.to_s
+    ENV["PDM_BUILD_SCM_VERSION"] = version.to_s if build.stable?
 
     if build.with? "completion-branch"
       # Fetch the completion branch manually
